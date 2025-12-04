@@ -12,7 +12,9 @@ export default function UserDet() {
   const fileInputRef = useRef(null);
   const [timestamp, setTimestamp] = useState(Date.now());
   const dispatch = useDispatch();
-
+useEffect(()=>{
+  console.log("Id user for Det",id)
+},[])
   async function getUser() {
     try {
       const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/getuser/${id}`);

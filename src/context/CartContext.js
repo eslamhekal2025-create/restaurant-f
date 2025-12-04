@@ -17,7 +17,7 @@ export const CartProvider = ({ children }) => {
     try {
       const { data } = await axios.post(
         `${process.env.REACT_APP_API_URL}/AddToCart`,
-        { productId, quantity, size },
+        {productId,quantity,size},
         {
           headers: {
             token: localStorage.getItem("token"),

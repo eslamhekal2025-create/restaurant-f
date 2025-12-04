@@ -3,6 +3,8 @@ import "./mainAdmin.css"
 import { useUser } from '../../context/userContext'
 import { useProduct } from '../../context/productContext'
 import { Link } from 'react-router-dom'
+import CategoryPieChart from '../StateCat/StateCat.jsx'
+
 export default function Dashboard() {
   const {countUsers}=useUser()
 
@@ -37,5 +39,6 @@ export default function Dashboard() {
       </Link>
 
     </section>
+    <CategoryPieChart/>
   </main>  )
 }

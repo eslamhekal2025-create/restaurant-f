@@ -1,43 +1,25 @@
-import React from 'react';
-import './About.css';
+import React from "react";
+import "./About.css"; // استدعاء ملف الـ CSS
 
-// ❄️ React.memo بيمنع إعادة الريندر لو الـ props ما اتغيرتش
-const About = React.memo(() => {
+const AboutUs = () => {
   return (
-    <main className="about-container">
-      <h2>About Us</h2>
-
-      <section className="about-intro">
-        <p>
-          Welcome to <strong>Rambo</strong> – your ultimate destination for top-quality products, unbeatable deals, and a smooth shopping experience.
-        </p>
-      </section>
-
-      <section className="about-section">
-        <h3>Who We Are</h3>
-        <p>
-          Rambo is an e-commerce platform created with the mission of bringing you the best shopping experience from the comfort of your home. We offer a wide variety of products and are committed to customer satisfaction.
-        </p>
-      </section>
-
-      <section className="about-section">
-        <h3>Our Vision</h3>
-        <p>
-          To become the leading online store in the region, known for quality, reliability, and outstanding service.
-        </p>
-      </section>
-
-      <section className="about-section">
-        <h3>Why Choose Us?</h3>
-        <ul>
-          <li>Fast and reliable delivery</li>
-          <li>Affordable prices</li>
-          <li>Secure payment methods</li>
-          <li>Excellent customer support</li>
-        </ul>
-      </section>
-    </main>
+    <section className="about-container">
+      <h1 className="about-title">من نحن</h1>
+      <p>
+        في مطعم <strong>طعم إيطاليا</strong>، نقدم لك تجربة إيطالية أصيلة بطابع مصري ودود.
+        عمنا، الشيف الكبير، قضى أكثر من <strong>30 سنة في إيطاليا</strong> يتعلم أسرار
+        البيتزا، الباستا، والحلويات الإيطالية من قلب نابولي وروما.
+      </p>
+      <p>
+        بعد رحلة طويلة مليئة بالشغف والخبرة، قرر يرجع بلده عشان يشارككم الطعم اللي عاشه هناك.
+        كل طبق عندنا معمول بإيدينا وبحب حقيقي، باستخدام أفضل المكونات الطازة.
+      </p>
+      <p>
+        هدفنا إننا نقدم لكم أكل لذيذ، خدمة ممتازة، وأجواء ممتعة، تخليك تحس وكأنك في قلب
+        إيطاليا. شرفونا وعيشوا التجربة معنا!
+      </p>
+    </section>
   );
-});
+};
 
-export default About;
+export default AboutUs;

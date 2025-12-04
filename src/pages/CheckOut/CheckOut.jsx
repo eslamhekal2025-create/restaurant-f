@@ -70,7 +70,7 @@ export default function CheckoutPage() {
               {items.map((item, index) => (
                 <div key={index} className="checkout-item">
 <div className="checkout-item">
-  <span><strong>{item.name}</strong> ({item.size})</span>
+  <span className='text-capitalize'><strong>{item.name}</strong> ({item.size})</span>
   <span>{item.quantity} × ${item.price?.toFixed(2)}</span>
 </div>
                 </div>

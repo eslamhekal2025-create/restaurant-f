@@ -13,6 +13,8 @@ export const ProductProvider = ({ children }) => {
   const [TotalPages, setTotalPages] = useState(0);
   const [CurrentPage, setCurrentPage] = useState(1);
 
+  const [stateCat, setstateCat] = useState([]);
+
   const token = localStorage.getItem("token");
 
   const getAllProducts = async (page = 1, limit = 7) => {
@@ -42,19 +44,35 @@ export const ProductProvider = ({ children }) => {
         setproductCategory(data.data);
       }
     } catch (error) {
-      toast.error("حدث خطأ أثناء جلب التصنيفات");
-      console.error("Error fetching categories:", error);
+      toast.error("Error happenend when");
+      console.error("Error fetching categories:",error);
     }
   };
+
+
+    const getStateCat = async () => {
+    try {
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/stateCat`);
+      if (data.success) {
+        setstateCat(data.data);
+      }
+    } catch (error) {
+      toast.error("Error happenend when");
+      console.error("Error fetching categories:",error);
+    }
+  };
+
 
   useEffect(() => {
     getAllProducts();
     getProductCat();
+    getStateCat()
   }, []);
 
   return (
     <ProductContext.Provider
       value={{
+        stateCat,
         TotalPages,
         CurrentPage,
         setTotalPages,

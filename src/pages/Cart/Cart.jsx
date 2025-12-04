@@ -1,4 +1,3 @@
-// CartComponent.jsx
 import React from 'react';
 import axios from 'axios';
 import { useCart } from '../../context/CartContext';
@@ -52,7 +51,7 @@ export default function CartComponent() {
                 </div>
                 <div className="cart-item-details">
                   <h3 className="item-name">{item.name}</h3>
-                  <span className="item-size">({item.size})</span>
+                  <span className="item-size text-capitalize">({item.size})</span>
                   <p className="item-price">Price: ${item.price?.toFixed(2)}</p>
                   <div className="quantity-controls">
                     <button onClick={() => decreaseQuantity(item)} disabled={item.quantity <= 1}>-</button>

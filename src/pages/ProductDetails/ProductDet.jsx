@@ -114,33 +114,44 @@ export default function ProductDet() {
   return (
     <div className="product-container">
       <div className="product-top">
-        <div className="product-left">
-          <div className="product-main-image">
-            <img src={mainImage} alt={productDetails.name} className="main-image" />
-            {productDetails.averageRating && (
-              <div className="star-container">
-                <FaStar className="star-icon" />
-                <span className="star-text">
-                  {Number.isInteger(productDetails.averageRating) ? productDetails.averageRating : productDetails.averageRating.toFixed(1)}
-                </span>
-              </div>
-            )}
-          </div>
+     <div className="product-left">
 
-          {productDetails.images.length > 1 && (
-            <div className="product-thumbnails">
-              {productDetails.images.map((img, index) => (
-                <img
-                  key={index}
-                  src={`${process.env.REACT_APP_API_URL}${img}`}
-                  alt={`thumb-${index}`}
-                  className="thumbnail"
-                  onClick={() => setMainImage(`${process.env.REACT_APP_API_URL}${img}`)}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+  {/* Main Image + Rating */}
+  <div className="product-image-wrapper">
+    <img
+      src={mainImage}
+      alt={productDetails.name}
+      className="product-main-img"
+    />
+
+    {productDetails.averageRating && (
+      <div className="image-rating-badge">
+        <FaStar className="image-rating-icon" />
+        <span className="image-rating-text">
+          {productDetails.averageRating}
+        </span>
+      </div>
+    )}
+  </div>
+
+  {/* Thumbnails */}
+  {productDetails.images.length > 1 && (
+    <div className="product-thumbnails">
+      {productDetails.images.map((img, index) => (
+        <img
+          key={index}
+          src={`${process.env.REACT_APP_API_URL}${img}`}
+          alt={`thumb-${index}`}
+          className="thumbnail"
+          onClick={() =>
+            setMainImage(`${process.env.REACT_APP_API_URL}${img}`)
+          }
+        />
+      ))}
+    </div>
+  )}
+
+</div>
 
         <div className="product-right">
           <p className="product-category">Category: {productDetails.category}</p>

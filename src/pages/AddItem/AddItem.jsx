@@ -25,18 +25,18 @@ const AddItem = React.memo(() => {
     };
   }, [imagePreviews]);
 
-  const handleChange = useCallback((e) => {
-    const { name, value } = e.target;
+    const handleChange = useCallback((e) => {
+      const { name, value } = e.target;
 
-    if (["s", "m", "l"].includes(name)) {
-      setFormData((prev) => ({
-        ...prev,
-        sizes: { ...prev.sizes, [name]: value },
-      }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
-  }, []);
+      if (["s", "m", "l"].includes(name)) {
+        setFormData((prev) => ({
+          ...prev,
+          sizes: { ...prev.sizes, [name]: value },
+        }));
+      } else {
+        setFormData((prev) => ({ ...prev, [name]: value }));
+      }
+    }, []);
 
   const handleImageChange = useCallback((e) => {
     const files = Array.from(e.target.files);
@@ -66,11 +66,11 @@ const AddItem = React.memo(() => {
     }
 
     const dataAdd = new FormData();
-    dataAdd.append("name", formData.name);
-    dataAdd.append("description", formData.description);
-    dataAdd.append("category", formData.category);
-    dataAdd.append("sizes", JSON.stringify(sizesArray));
-    images.forEach((img) => dataAdd.append("images", img));
+     dataAdd.append("name", formData.name);
+     dataAdd.append("description", formData.description);
+     dataAdd.append("category", formData.category);
+     dataAdd.append("sizes", JSON.stringify(sizesArray));
+     images.forEach((img) => dataAdd.append("images", img));
 
     try {
       const { data } = await axios.post(

@@ -5,7 +5,7 @@ import { useCart } from '../../context/CartContext.js';
 import { useUser } from '../../context/userContext.js';
 import { useSelector } from 'react-redux';
 import logo from "../Loading/482219503_122111766968774860_1765049624887787653_n.jpg"
-import { MdRestaurantMenu  } from "react-icons/md";
+import {MdRestaurantMenu} from "react-icons/md";
 
 export default function Navbar() {
   const { countCart, countWishList } = useCart();
@@ -13,12 +13,12 @@ export default function Navbar() {
   const token = localStorage.getItem("token");
   const user = useSelector((x) => x.user.user);
   const navigate = useNavigate();
-
   const isPrivileged = user?.role === "admin" || user?.role === "moderator";
   const [searchQuery, setSearchQuery] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const handleCloseMenu = () => setMenuOpen(false);
 
+  console.log("UserNavIsNavUser",user)
   const handleSearchChange = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
@@ -45,7 +45,7 @@ export default function Navbar() {
         <div className="nav-center">
           <input
             type="text"
-            placeholder="Search for products..."
+            placeholder="Search for products..." 
             value={searchQuery}
             onChange={handleSearchChange}
             className="search-box"
@@ -91,7 +91,8 @@ export default function Navbar() {
           )}
 
           {token && (
-            <Link onClick={handleCloseMenu} to={`/userDet/${user?.id}`} className="profile-pic-link">
+            <Link onClick={handleCloseMenu}to={`/userDet/${user?.id||user?._id}`}
+ className="profile-pic-link">
               <img
                 className="profile-pic"
                 src={

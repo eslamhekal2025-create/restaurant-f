@@ -22,7 +22,7 @@ export default function AllOrders() {
         setAllOrders(filtered);
       }
     } catch (error) {
-      toast.error("Failed to fetch orders");
+      toast.error("فشل في تحميل الطلبات");
     } finally {
       setLoading(false);
     }
@@ -39,7 +39,7 @@ export default function AllOrders() {
       );
 
       if (data.success) {
-        toast.success("Status updated");
+        toast.success("تم تحديث الحالة");
         setAllOrders(prev =>
           prev.map(order =>
             order._id === orderId ? { ...order, status: newStatus } : order
@@ -47,20 +47,20 @@ export default function AllOrders() {
         );
       }
     } catch (error) {
-      toast.error("Failed to update status");
+      toast.error("فشل في تحديث الحالة");
     }
   };
 
   const deleteOrder = async (id) => {
     const result = await Swal.fire({
-      title: 'Are you sure?',
-      text: "This action cannot be undone.",
+      title: 'هل أنت متأكد؟',
+      text: "لن يمكنك التراجع بعد الحذف.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'Cancel',
+      confirmButtonText: 'نعم، احذف!',
+      cancelButtonText: 'إلغاء',
     });
 
     if (result.isConfirmed) {
@@ -70,13 +70,13 @@ export default function AllOrders() {
         });
 
         if (response.data.success) {
-          toast.success("Order deleted successfully");
+          toast.success("تم حذف الطلب بنجاح");
           getAllOrders();
         } else {
-          toast.error(response.data.message || "Error deleting order");
+          toast.error(response.data.message || "حدث خطأ أثناء الحذف");
         }
       } catch (error) {
-        toast.error(error.response?.data?.message || "Something went wrong");
+        toast.error(error.response?.data?.message || "حدث خطأ غير متوقع");
       }
     }
   };
@@ -85,10 +85,10 @@ export default function AllOrders() {
     getAllOrders();
   }, [getAllOrders]);
 
-  if (loading) return <div className="loading-orders">جاري تحميل الطلبات...</div>;
+  if (loading) return <div className="loading-orders">⏳ جاري تحميل الطلبات...</div>;
 
   if (allOrders.length === 0) {
-    return <div className="no-orders">🚫 لا يوجد طلبات حاليًا.</div>;
+    return <div className="no-orders">There are no requests currently. 🚫 </div>;
   }
 
   return (
@@ -97,11 +97,11 @@ export default function AllOrders() {
         <div className="order" key={order._id}>
           <button className="DeleteOrder" onClick={() => deleteOrder(order._id)}>×</button>
 
-          <h2>Order #{i + 1}</h2>
+          <h2>#{i + 1}</h2>
           <p><strong>Name:</strong> {order.userId.name}</p>
           <p><strong>Email:</strong> {order.userId.email}</p>
-          <p><strong>Phone:</strong> 0{order.userId.phone}</p>
-          <p><strong>Total Price:</strong> {order.totalPrice} EGP</p>
+          <p><strong>Mob:</strong> 0{order.userId.phone}</p>
+          <p><strong>Total:</strong> {order.totalPrice} EGP</p>
           <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleString()}</p>
 
           <div>
@@ -110,20 +110,27 @@ export default function AllOrders() {
               value={order.status}
               onChange={(e) => handleStatusChange(order._id, e.target.value)}
             >
-              <option value="pending">Pending</option>
-              <option value="paid">Paid</option>
-              <option value="canceled">Canceled</option>
+              <option value="pending">pending</option>
+              <option value="paid">
+paid              </option>
+              <option value="canceled">canceled</option>
             </select>
           </div>
 
           <div className="product-list">
             <h4>Products:</h4>
-            {order.products.map((prod, index) => (
-              <div className="product" key={index}>
-                <p>🍕 <strong>{prod.productId?.name || 'Unknown'}</strong></p>
-                <p>Quantity: {prod.quantity}</p>
-              </div>
-            ))}
+            {order.products.map((prod, index) => {
+              const currentPrice = prod.productId?.sizes?.find(s => s.size === prod.size)?.price;
+
+              return (
+                <div className="product" key={index}>
+                  <p>🍕 <strong>{prod.productId?.name || 'غير معروف'}</strong></p>
+                  <p>Size: {prod.size}</p>
+                  <p>Price : {currentPrice ? `${currentPrice} EGP` : 'غير متاح'}</p>
+                  <p>Qty: {prod.quantity}</p>
+                </div>
+              );
+            })}
           </div>
 
           <hr />

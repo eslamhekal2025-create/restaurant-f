@@ -42,7 +42,7 @@ const Register = () => {
       Object.entries(user).forEach(([key, value]) => {
         if (value) formData.append(key, value);
       });
-
+      
       const res = await axios.post(`${process.env.REACT_APP_API_URL}/register`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",

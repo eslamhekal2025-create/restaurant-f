@@ -14,7 +14,8 @@ export default function AllProducts() {
     TotalPages,
     CurrentPage,
     setCurrentPage,
-  } = useProduct();
+  } 
+  =useProduct();
 
   useEffect(() => {
     getAllProducts(CurrentPage);

@@ -22,6 +22,7 @@ export default function ReviewUsers() {
       const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/getAllReview`);
       if (data.success) {
         setReviews(data.data);
+        console.log("ReviewsData",data.data)
       }
     } catch (error) {
       toast.error("Failed to fetch reviews");
@@ -85,21 +86,21 @@ export default function ReviewUsers() {
                     <p className='EditRev' onClick={() => openEditModal(review)}>!</p>
                   </div>
                 )}
-                <img
-                  className='user-image'
-                  src={
-                    review.userId?.image
-                      ? review.userId.image.startsWith("http")
-                        ? review.userId.image
-                        : `${process.env.REACT_APP_API_URL}${review.userId.image}`
-                      : `https://ui-avatars.com/api/?name=${review.userId?.name || 'User'}&background=random&color=fff`
-                  }
-                  alt={review?.name || "User"}
-                />
+            <img
+  className='user-image'
+  src={
+    review.userId?.image
+      ? review.userId.image.startsWith("http")
+        ? review.userId.image
+        :`${process.env.REACT_APP_API_URL}${review.userId.image}`
+      :`https://ui-avatars.com/api/?name=${review.userId?.name || 'User'}&background=random&color=fff`
+  }
+  alt={review?.name || "User"}
+/>
+
                 <h3 className="user-name">{review.userId.name}</h3>
                 <p className="rating">Rating: {review.rating} ⭐</p>
                 <p className="comment">“{review.comment}”</p>
-
                 {editReviewId === review._id && (
                   <div className="inline-edit">
                     <h4>تعديل التقييم</h4>
@@ -111,7 +112,7 @@ export default function ReviewUsers() {
                     />
                     <select value={editRating} onChange={(e) => setEditRating(Number(e.target.value))}>
                       {[1, 2, 3, 4, 5].map((num) => (
-                        <option key={num} value={num}>{num} ⭐</option>
+                        <option key={num} value={num}>{num}⭐</option>
                       ))}
                     </select>
                     <div className="modal-buttons">

@@ -17,21 +17,21 @@ export default function AllUser() {
 
   const deleteUser = async (id) => {
     const result = await Swal.fire({
-      title: 'هل أنت متأكد؟',
-      text: "لن تتمكن من التراجع عن هذا!",
+      title: 'Are You Sure',
+      text: "You can't undo this!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
       cancelButtonColor: '#3085d6',
-      confirmButtonText: 'نعم، احذفه!',
-      cancelButtonText: 'إلغاء',
+      confirmButtonText: 'Yes,delete',
+      cancelButtonText: 'Cancel',
     });
 
     if (result.isConfirmed) {
       try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/deleteUser/${id}`);
         if (response.data.success) {
-          toast.success("تم حذف المستخدم بنجاح");
+          toast.success("you delete this successfully");
           getAllUser();
           setRefresh(prev => !prev);
           Swal.fire('تم!', 'تم حذف المستخدم.', 'success');
@@ -48,7 +48,7 @@ if (loading) {
   return (
     <div className="custom-loader-container">
       <img src={loading} alt="Loading" className="custom-loader-image" />
-      <p className="custom-loader-text">جارٍ تحميل المستخدمين...</p>
+      <p className="custom-loader-text">Loding...</p>
     </div>
   );
 }
@@ -62,24 +62,26 @@ if (loading) {
               <button
                 className="delete-btn"
                 onClick={() => deleteUser(user._id)}
-                title="حذف المستخدم"
+                title="delete user"
               >
                 <FaTrashAlt />
               </button>
 
               <div className="card-header">
-                <p><strong>الاسم:</strong> {user.name}</p>
+                <p><strong>Name:</strong> {user.name}</p>
               </div>
-              <p><strong>البريد الإلكتروني:</strong> {user.email}</p>
-              <p><strong>الدور:</strong> {user.role}</p>
+              <p><strong>Email:</strong> {user.email}</p>
+              <p><strong>Role:</strong> {user.role}</p>
 
               <Link className="edit-btn" to={`/UpdateRole/${user._id}`}>
-                <FaEdit /> تعديل الدور
+                <FaEdit />  Edit Role
               </Link>
             </div>
           ))
         ) : (
-          <p className="no-users">لا يوجد مستخدمين.</p>
+          <p className="no-users">
+          No Users Found
+          </p>
         )}
       </div>
     </div>
