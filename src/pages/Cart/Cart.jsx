@@ -59,9 +59,12 @@ export default function CartComponent() {
                     <button onClick={() => increaseQuantity(item)}>+</button>
                   </div>
                   <p className="item-total">Total: ${(item.price * item.quantity).toFixed(2)}</p>
-                  <button className="remove-btn" onClick={() => removeFromCart(item._id)}>
-                    Remove ❌
-                  </button>
+                 <button
+  className="remove-btn"
+  onClick={() => removeCart(item._id, item.size)}
+>
+  Remove ❌
+</button>
                 </div>
               </div>
             ))}

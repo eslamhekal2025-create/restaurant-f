@@ -51,19 +51,27 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const removeCart = async (product) => {
-    try {
-      const { data } = await axios.delete(`${process.env.REACT_APP_API_URL}/deleteProductCart/${product}`, {
+ const removeCart = async (productId, size) => {
+  try {
+    const { data } = await axios.delete(
+      `${process.env.REACT_APP_API_URL}/deleteProductCart`,
+      {
         headers: { token: localStorage.getItem("token") },
-      });
-      if (data.success) {
-        getCart();
+        data: { productId, size },
       }
-    } 
-    catch (err) {
-      console.error("Error removing from cart:", err.response?.data?.message || err.message);
+    );
+
+    if (data.success) {
+      getCart();
     }
-  };
+  } catch (err) {
+    console.error(
+      "Error removing from cart:",
+      err.response?.data?.message || err.message
+    );
+  }
+};
+
 
   const addToWihsList = async (productId) => {
     try {
