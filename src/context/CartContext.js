@@ -59,7 +59,8 @@ export const CartProvider = ({ children }) => {
       if (data.success) {
         getCart();
       }
-    } catch (err) {
+    } 
+    catch (err) {
       console.error("Error removing from cart:", err.response?.data?.message || err.message);
     }
   };

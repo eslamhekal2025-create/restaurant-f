@@ -11,7 +11,6 @@ export default function ReviewUsers() {
   const [editRating, setEditRating] = useState(1);
 
   const user = useSelector((state) => state.user.user);
-  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     getAllReview();
@@ -80,12 +79,13 @@ export default function ReviewUsers() {
             .filter(review => review.userId)
             .map((review) => (
               <div className="review-card" key={review._id}>
-                {review.userId?._id === user?.id && (
-                  <div className='btnsActionRev'>
-                    <p className='DeleteRev' onClick={() => deleteReview(review._id)}>x</p>
-                    <p className='EditRev' onClick={() => openEditModal(review)}>!</p>
-                  </div>
-                )}
+                {review.userId?._id === user?._id && (
+  <div className='btnsActionRev'>
+    <p className='DeleteRev' onClick={() => deleteReview(review._id)}>x</p>
+    <p className='EditRev' onClick={() => openEditModal(review)}>!</p>
+  </div>
+)}
+
             <img
   className='user-image'
   src={
